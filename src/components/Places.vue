@@ -1,11 +1,15 @@
 <template>
   <div>
-    <h2
-      v-if="locations.length === 0"
-      style="margin-left: 20px;">
-      Click the button in the lower right to add locations!
-    </h2>
     <md-list>
+      <md-list-item v-if="locations.length === 0">
+        <div>
+          <img class="grey-img" :src="getImgUrl('partly-cloudy-day-static')">
+        </div>
+        <div class="md-list-text-container" id="place-holder">
+          <h4>Welcome to the view weather app!</h4>
+          <p>Try adding a location to test it out</p>
+        </div>
+      </md-list-item>
       <md-list-item v-for="(location, index) in locations" :key="index">
         <div>
           <img :src="getImgUrl(location.weather.currently.icon)">
@@ -28,10 +32,19 @@
         </md-button>
         <md-divider class="md-inset"></md-divider>
       </md-list-item>
+      <md-list-item>
+        <div>
+          <md-button class="md-icon-button md-raised md-accent" id="place-adder" @click.native="openDialog('addLocation')">
+            <md-icon>add</md-icon>
+          </md-button>
+        </div>
+        <div class="md-list-text-container" id="place-adder-text">
+          <span>Add location</span>
+        </div>
+      </md-list-item>
     </md-list>
-    <md-dialog md-open-from="#fab" md-close-to="#fab" ref="addLocation">
+    <md-dialog md-open-from="#place-adder" md-close-to="#place-adder" ref="addLocation">
       <md-dialog-title>Add location</md-dialog-title>
-
       <md-dialog-content>
         <form>
           <md-input-container>
@@ -40,16 +53,11 @@
           </md-input-container>
         </form>
       </md-dialog-content>
-
       <md-dialog-actions>
         <md-button class="md-primary" @click.native="closeDialog('addLocation')">Cancel</md-button>
         <md-button class="md-primary" @click.native="closeDialog('addLocation', newLocation)">Add</md-button>
       </md-dialog-actions>
     </md-dialog>
-
-    <md-button class="md-fab md-fab-bottom-right" id="fab" @click.native="openDialog('addLocation')">
-      <md-icon>add</md-icon>
-    </md-button>
   </div>
 </template>
 
@@ -108,3 +116,30 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .grey-img {
+    -webkit-filter: grayscale(100%);
+       -moz-filter: grayscale(100%);
+         -o-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+            filter: grayscale(100%);
+  }
+
+  #place-adder {
+    margin-left: 7px;
+  }
+
+  #place-adder > i {
+    color: white;
+  }
+
+  #place-adder-text {
+    margin-left: 12px;
+  }
+
+  #place-holder > h4 {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+</style>
