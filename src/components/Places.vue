@@ -11,15 +11,14 @@
         </div>
       </md-list-item>
       <md-list-item v-for="(location, index) in locations" :key="index">
+        <router-link :to="{ name: 'forecast', params: { id: location.id }}">
         <div>
           <img :src="getImgUrl(location.weather.currently.icon)">
         </div>
         <div class="md-list-text-container">
-          <span>{{location.weather.currently.summary}}</span>
+          <span class="lighter">{{location.weather.currently.summary}}</span>
           <span>{{location.weather.currently.temperature | decimalPlaces(0)}}º F ({{location.weather.currently.temperature | temperatureInC | decimalPlaces(0)}}° C)</span>
-          <router-link :to="{ name: 'forecast', params: { id: location.id }}">
-            {{location.name}}
-          </router-link>
+          <span class="bold">Location: {{location.name}}</span>
         </div>
         <md-button v-if="!location.favorite" class="md-icon-button md-dense" @click.native="setFavorite(location.id)">
           <md-icon class="md-accent">star_border</md-icon>
@@ -30,6 +29,7 @@
         <md-button class="md-icon-button md-dense" @click.native="deleteLocation(location.id)">
           <md-icon class="md-warn">clear</md-icon>
         </md-button>
+        </router-link>
         <md-divider class="md-inset"></md-divider>
       </md-list-item>
       <md-list-item>
@@ -141,5 +141,13 @@ export default {
   #place-holder > h4 {
     margin-bottom: 0;
     margin-top: 0;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .lighter {
+    font-weight: lighter;
   }
 </style>
