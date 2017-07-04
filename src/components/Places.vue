@@ -6,7 +6,7 @@
           <img class="grey-img" :src="getImgUrl('partly-cloudy-day-static')">
         </div>
         <div class="md-list-text-container" id="place-holder">
-          <h4>Welcome to the view weather app!</h4>
+          <h4>Welcome to the Vue weather app!</h4>
           <p>Try adding a location to test it out</p>
         </div>
       </md-list-item>
