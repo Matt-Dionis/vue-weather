@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 :class="severity">{{alert.title}}</h2>
+    <h3 :class="severity">{{alert.title}}</h3>
     <p>{{alert.description}}</p>
   </div>
 </template>
