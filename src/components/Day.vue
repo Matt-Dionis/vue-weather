@@ -5,7 +5,7 @@
     </div>
     <div class="md-list-text-container">
       <span class="bold">
-        {{dailyForecast.time | dayOfWeek}}
+        {{dayOfWeek}}
       </span>
       <span>
         <span style="color:red;">
@@ -25,11 +25,25 @@
 <script>
   export default {
     name: 'Day',
-    props: ['dailyForecast'],
+    props: ['dailyForecast', 'index'],
     methods: {
       getImgUrl (icon) {
         const images = require.context('../assets/icons/', false, /\.svg$/);
         return images('./' + icon + '.svg');
+      }
+    },
+    computed: {
+      dayOfWeek () {
+        if (this.index === 0) {
+          return 'Today';
+        } else if (this.index === 1) {
+          return 'Tomorrow';
+        } else {
+          const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+          const today = new Date();
+          const forecastDay = new Date(today.setDate(today.getDate() + this.index));
+          return weekdays[forecastDay.getDay()];
+        }
       }
     }
   }

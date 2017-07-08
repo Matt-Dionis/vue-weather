@@ -1,6 +1,9 @@
 <template>
   <div>
     <md-toolbar class="md-accent">
+      <md-button class="md-icon-button" @click.native="$router.push('/')">
+        <md-icon>wb_sunny</md-icon>
+      </md-button>
       <h2 class="md-title" style="flex: 1">Vue Weather</h2>
       <md-button
         v-if="favoriteLocation"

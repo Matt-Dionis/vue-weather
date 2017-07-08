@@ -2,7 +2,7 @@
   <div>
     <md-list>
       <div v-for="(day, index) of forecast.data" :key="index">
-        <day :dailyForecast="day"></day>
+        <day :dailyForecast="day" :index="index"></day>
         <md-divider></md-divider>
       </div>
     </md-list>

@@ -68,12 +68,6 @@
         this.alertsVisible = !this.alertsVisible;
       }
     },
-    mounted: function () {
-      this.$store.dispatch({
-        type: 'LOAD_LOCATION',
-        id: this.$route.params.id
-      });
-    },
     components: {
       Alerts,
       Timeline
