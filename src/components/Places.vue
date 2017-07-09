@@ -18,7 +18,7 @@
           <span class="lighter">{{location.weather.currently.summary}}</span>
           <span id="temp" class="temp-warm">{{location.weather.currently.temperature | decimalPlaces(0)}}º F ({{location.weather.currently.temperature | temperatureInC | decimalPlaces(0)}}° C)</span>
           <router-link :to="{ name: 'place', params: { id: location.id }}">
-            <span class="bold">Location: {{location.name}}</span>
+            <span class="bold">Location: {{location.name}}<md-icon style="color:#3f51b5;">keyboard_arrow_right</md-icon></span>
           </router-link>
         </div>
         <md-button v-if="!location.favorite" class="md-icon-button md-dense" @click.native="setFavorite(location.id)">
@@ -173,5 +173,9 @@ export default {
     background: -o-linear-gradient(right, blue, lightblue);
     background: -moz-linear-gradient(right, blue, lightblue);
     background: linear-gradient(to right, blue , lightblue);
+  }
+
+  a:not(.md-button):not(.md-bottom-bar-item):hover {
+    text-decoration: none;
   }
 </style>
