@@ -1,37 +1,41 @@
 <template>
   <div>
     <md-list>
-      <md-list-item v-if="locations.length === 0">
-        <div>
-          <img class="grey-img" :src="getImgUrl('partly-cloudy-day-static')">
-        </div>
-        <div class="md-list-text-container" id="place-holder">
-          <h4>Welcome to the Vue weather app!</h4>
-          <p>Try adding a location to test it out</p>
-        </div>
-      </md-list-item>
-      <md-list-item v-for="(location, index) in locations" :key="index">
-        <div>
-          <img :src="getImgUrl(location.weather.currently.icon)">
-        </div>
-        <div class="md-list-text-container">
-          <span class="lighter">{{location.weather.currently.summary}}</span>
-          <span id="temp" class="temp-warm">{{location.weather.currently.temperature | decimalPlaces(0)}}º F ({{location.weather.currently.temperature | temperatureInC | decimalPlaces(0)}}° C)</span>
-          <router-link :to="{ name: 'place', params: { id: location.id }}">
-            <span class="bold">Location: {{location.name}}<md-icon style="color:#3f51b5;">keyboard_arrow_right</md-icon></span>
-          </router-link>
-        </div>
-        <md-button v-if="!location.favorite" class="md-icon-button md-dense" @click.native="setFavorite(location.id)">
-          <md-icon class="md-accent">star_border</md-icon>
-        </md-button>
-        <md-button v-else class="md-icon-button md-dense" disabled>
-          <md-icon class="md-accent">star</md-icon>
-        </md-button>
-        <md-button class="md-icon-button md-dense" @click.native="deleteLocation(location.id)">
-          <md-icon class="md-warn">clear</md-icon>
-        </md-button>
-        <md-divider class="md-inset"></md-divider>
-      </md-list-item>
+      <transition name="fade-bounce">
+        <md-list-item v-if="locations.length === 0">
+          <div>
+            <img class="grey-img" :src="getImgUrl('partly-cloudy-day-static')">
+          </div>
+          <div class="md-list-text-container" id="place-holder">
+            <h4>Welcome to the Vue weather app!</h4>
+            <p>Try adding a location to test it out</p>
+          </div>
+        </md-list-item>
+      </transition>
+      <transition-group name="fade-bounce">
+        <md-list-item v-for="(location, index) in locations" :key="location.id">
+          <div>
+            <img :src="getImgUrl(location.weather.currently.icon)">
+          </div>
+          <div class="md-list-text-container">
+            <span class="lighter">{{location.weather.currently.summary}}</span>
+            <span id="temp" class="temp-warm">{{location.weather.currently.temperature | decimalPlaces(0)}}º F ({{location.weather.currently.temperature | temperatureInC | decimalPlaces(0)}}° C)</span>
+            <router-link :to="{ name: 'place', params: { id: location.id }}">
+              <span class="bold">Location: {{location.name}}<md-icon style="color:#3f51b5;">keyboard_arrow_right</md-icon></span>
+            </router-link>
+          </div>
+          <md-button v-if="!location.favorite" class="md-icon-button md-dense" @click.native="setFavorite(location.id)">
+            <md-icon class="md-accent">star_border</md-icon>
+          </md-button>
+          <md-button v-else class="md-icon-button md-dense" disabled>
+            <md-icon class="md-accent">star</md-icon>
+          </md-button>
+          <md-button class="md-icon-button md-dense" @click.native="deleteLocation(location.id)">
+            <md-icon class="md-warn">clear</md-icon>
+          </md-button>
+          <md-divider class="md-inset"></md-divider>
+        </md-list-item>
+      </transition-group>
       <md-list-item @click.native="openDialog('addLocation')">
         <div>
           <md-button class="md-icon-button md-raised md-accent" id="place-adder">
@@ -177,5 +181,16 @@ export default {
 
   a:not(.md-button):not(.md-bottom-bar-item):hover {
     text-decoration: none;
+  }
+
+  .fade-bounce-enter-active {
+    transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
+  }
+  .fade-bounce-leave-active {
+    transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
+  }
+  .fade-bounce-enter, .fade-bounce-leave-to {
+    transform: rotateY(-90deg);
+    opacity: 0;
   }
 </style>
