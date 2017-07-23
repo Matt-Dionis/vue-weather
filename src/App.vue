@@ -14,6 +14,9 @@
       </transition>
     </md-toolbar>
     <router-view></router-view>
+    <div class="footer">
+      Powered by <a href="https://darksky.net/poweredby/" target="_blank">Dark Sky</a>.
+    </div>
   </div>
 </template>
 
@@ -34,5 +37,15 @@
   }
   .fade-enter, .fade-leave-to {
     opacity: 0
+  }
+
+  .footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
   }
 </style>
