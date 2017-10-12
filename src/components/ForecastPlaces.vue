@@ -24,11 +24,11 @@
               <span class="bold">Location: {{location.name}}<md-icon style="color:#3f51b5;">keyboard_arrow_right</md-icon></span>
             </router-link>
           </div>
-          <md-button v-if="!location.favorite" class="md-icon-button md-dense" @click.native="setFavorite(location.id)">
-            <md-icon class="md-accent">star_border</md-icon>
-          </md-button>
-          <md-button v-else class="md-icon-button md-dense" disabled>
+          <md-button v-if="location.favorite" key="favorite" class="md-icon-button md-dense" disabled>
             <md-icon class="md-accent">star</md-icon>
+          </md-button>
+          <md-button v-else key="not-favorite" class="md-icon-button md-dense" @click.native="setFavorite(location.id)">
+            <md-icon class="md-accent">star_border</md-icon>
           </md-button>
           <md-button class="md-icon-button md-dense" @click.native="deleteLocation(location.id)">
             <md-icon class="md-warn">clear</md-icon>
@@ -69,7 +69,7 @@
 import { mapState } from 'vuex';
 
 export default {
-  name: 'Places',
+  name: 'ForecastPlaces',
   data () {
     return {
       newLocation: {}
@@ -124,7 +124,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .grey-img {
     -webkit-filter: grayscale(100%);
        -moz-filter: grayscale(100%);

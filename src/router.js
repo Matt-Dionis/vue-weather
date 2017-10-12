@@ -1,20 +1,20 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Place from './components/Place';
-import Places from './components/Places';
+import ForecastPlace from './components/ForecastPlace';
+import ForecastPlaces from './components/ForecastPlaces';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    component: Places
+    component: ForecastPlaces
   },
   {
     name: 'place',
     path: '/places/:id',
-    component: Place
+    component: ForecastPlace
   }
 ];
 

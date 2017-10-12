@@ -24,12 +24,18 @@
 
 <script>
   export default {
-    name: 'Day',
-    props: ['dailyForecast', 'index'],
-    methods: {
-      getImgUrl (icon) {
-        const images = require.context('../assets/icons/', false, /\.svg$/);
-        return images('./' + icon + '.svg');
+    name: 'DailyForecast',
+    props: {
+      dailyForecast: {
+        type: Object,
+        required: true,
+        validator: function (forecast) {
+          return forecast.icon && forecast.summary && forecast.temperatureMax && forecast.temperatureMin
+        }
+      },
+      index: {
+        type: Number,
+        required: true
       }
     },
     computed: {
@@ -44,6 +50,12 @@
           const forecastDay = new Date(today.setDate(today.getDate() + this.index));
           return weekdays[forecastDay.getDay()];
         }
+      }
+    },
+    methods: {
+      getImgUrl (icon) {
+        const images = require.context('../assets/icons/', false, /\.svg$/);
+        return images('./' + icon + '.svg');
       }
     }
   }

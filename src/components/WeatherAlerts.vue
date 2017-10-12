@@ -2,24 +2,24 @@
   <div>
     <md-list>
       <md-list-item v-for="(alert, index) in alerts" :key="index">
-        <alert :alert="alert"></alert>
+        <WeatherAlert :alert="alert"></WeatherAlert>
       </md-list-item>
     </md-list>
   </div>
 </template>
 
 <script>
-  import Alert from './Alert';
+  import WeatherAlert from './WeatherAlert';
 
   export default {
-    name: 'Alerts',
+    name: 'WeatherAlerts',
+    components: {
+      WeatherAlert
+    },
     computed: {
       alerts () {
         return this.$store.getters.alerts(this.$route.params.id);
       }
-    },
-    components: {
-      Alert
     }
   }
 </script>

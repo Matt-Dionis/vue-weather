@@ -7,8 +7,16 @@
 
 <script>
   export default {
-    name: 'Alert',
-    props: ['alert'],
+    name: 'WeatherAlert',
+    props: {
+      alert: {
+        type: Object,
+        required: true,
+        validator: function (alert) {
+          return alert.title && alert.description && alert.severity
+        }
+      }
+    },
     computed: {
       severity () {
         return {

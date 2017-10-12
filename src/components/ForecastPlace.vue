@@ -28,18 +28,22 @@
         </md-button>
       </md-list-item>
     </md-list>
-    <alerts v-show="alertsVisible"></alerts>
+    <WeatherAlerts v-show="alertsVisible"></WeatherAlerts>
     <hr style="border-style: dashed;">
-    <timeline></timeline>
+    <ForecastTimeline/>
   </div>
 </template>
 
 <script>
-  import Alerts from './Alerts';
-  import Timeline from './Timeline';
+  import WeatherAlerts from './WeatherAlerts';
+  import ForecastTimeline from './ForecastTimeline';
 
   export default {
-    name: 'Place',
+    name: 'ForecastPlace',
+    components: {
+      WeatherAlerts,
+      ForecastTimeline
+    },
     data () {
       return {
         alertsVisible: false
@@ -67,15 +71,11 @@
       toggleAlerts () {
         this.alertsVisible = !this.alertsVisible;
       }
-    },
-    components: {
-      Alerts,
-      Timeline
     }
   }
 </script>
 
-<style>
+<style scoped>
   .md-list-text-container > * {
     white-space: normal;
   }

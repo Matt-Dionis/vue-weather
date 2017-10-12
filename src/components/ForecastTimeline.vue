@@ -2,7 +2,7 @@
   <div>
     <md-list>
       <div v-for="(day, index) of forecast.data" :key="index">
-        <day :dailyForecast="day" :index="index"></day>
+        <DailyForecast :dailyForecast="day" :index="index"></DailyForecast>
         <md-divider></md-divider>
       </div>
     </md-list>
@@ -10,17 +10,17 @@
 </template>
 
 <script>
-  import Day from './Day';
+  import DailyForecast from './DailyForecast';
 
   export default {
-    name: 'Timeline',
+    name: 'ForecastTimeline',
+    components: {
+      DailyForecast
+    },
     computed: {
       forecast () {
         return this.$store.getters.forecast(this.$route.params.id);
       }
-    },
-    components: {
-      Day
     }
   }
 </script>
